@@ -24,7 +24,10 @@ app.use(bodyParser.json()); // permite uso de json em envio de formulário (API)
 // Rota -> Página Inicial
 // views/index.ejs
 app.get('/', (req, res) => {
-    Pergunta.findAll({ raw: true }).then(perguntas => {
+    Pergunta.findAll({
+        raw: true,
+        order: [['id', 'DESC']] // ASC = crescente || DESC = decrescente
+    }).then(perguntas => { // retorna todas as perguntas e renderiza no index
         // console.log(perguntas);
         res.render('index', { perguntas });
     })
