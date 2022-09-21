@@ -2,6 +2,17 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+// Banco de dados
+const connection = require('./database/database');
+connection
+    .authenticate()
+    .then(() => {
+        console.log('Conexão realizada com sucesso!');
+    })
+    .catch((msgErr) => {
+        console.log(msgErr);
+    })
+
 app.set('view engine', 'ejs'); // informa qual o template engine a ser utilizado (pasta views por padrão)
 app.use(express.static('public')); // arquivos estáticos que não de responsabilidade do backend
 
