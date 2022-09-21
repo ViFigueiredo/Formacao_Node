@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 // Banco de dados
 const connection = require('./database/database');
 const Pergunta = require('./database/Pergunta');
+const Resposta = require('./database/Resposta');
 
 connection
     .authenticate()
