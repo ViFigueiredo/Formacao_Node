@@ -14,3 +14,5 @@ const Pergunta = connection.define('perguntas', {
 
 // Verifica se a tabela já existe e caso positivo, impede a sobreescrição
 Pergunta.sync({force: false}).then(() => {});
+
+module.exports = Pergunta;

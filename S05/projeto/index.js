@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 // Banco de dados
 const connection = require('./database/database');
-const perguntaModel = require('./database/Pergunta');
+const Pergunta = require('./database/Pergunta');
 
 connection
     .authenticate()
@@ -34,10 +34,10 @@ app.get('/perguntar', (req, res) => {
 app.post('/salvarpergunta', (req, res) => {
     var titulo = req.body.titulo; // html name=titulo
     var descricao = req.body.descricao; // html name=descricao
-    res.send('Formulário recebido!' + '<br>' +
-        'Titulo: ' + titulo + '<br>' +
-        'Descricao: ' + descricao
-    );
+    Pergunta.create({ titulo, descricao }) // insere os dados do form na tabela
+        .then(() => {
+            res.redirect('/');
+        })
 });
 
 // Config server
