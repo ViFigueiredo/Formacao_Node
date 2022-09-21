@@ -10,6 +10,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/perguntar', (req, res) => {
+    res.render('perguntar');
+});
+
 // Config server
 const porta = 8080;
 app.listen(porta, () => {
