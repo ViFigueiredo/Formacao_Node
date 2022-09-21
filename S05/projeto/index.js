@@ -14,6 +14,10 @@ app.get('/perguntar', (req, res) => {
     res.render('perguntar');
 });
 
+app.post('/salvarpergunta', (req, res) => {
+    res.send('Formulário recebido.');
+});
+
 // Config server
 const porta = 8080;
 app.listen(porta, () => {
