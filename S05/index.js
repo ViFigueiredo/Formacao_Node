@@ -12,11 +12,20 @@ app.get('/:nome/:idade', (req, res) => {
     var nome = req.params.nome;
     var idade = req.params.idade;
     var exibirMsg = true;
+
+    var produtos = [
+        {nome: 'Doritos', preco: 3.14},
+        {nome: 'Coca-cola', preco: 5},
+        {nome: 'Leite', preco: 1.45},
+        {nome: 'Redbull', preco: 12.5},
+        {nome: 'Biscoito', preco: 3.45}
+    ];
+
     res.render('index', {
-        nome, idade,
+        nome, idade, produtos,
         lang: 'Javascript',
         empresa: 'Avantti',
-        msg: exibirMsg
+        msg: exibirMsg,
     });
 });
 
