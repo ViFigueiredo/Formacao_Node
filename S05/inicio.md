@@ -5,7 +5,7 @@
 > Node - interpretador JS
 > Express - framework server
 > EJS - template engine de linguagem JS/HTML
-> Bootstrap - framework CSS
+> Bootstrap - framework CSS (https://getbootstrap.com/docs/4.5/getting-started/introduction/)
 > MySQL - banco de dados SQL
 > Sequelize - ORM SQL para NodeJS e TS
 
@@ -15,3 +15,5 @@ npm init -> cria o arquivo de identificação e estrutura do projeto -> package.
 
 npm i express -S -> instalação do express
 npm i ejs -S -> instalação do EJS
+
+
