@@ -49,10 +49,10 @@ app.post('/salvarpergunta', (req, res) => {
 app.get('/pergunta/:id', (req, res) => {
     var id = req.params.id;
     Pergunta.findOne({
-        where: { id: id }
+        where: { id } // localiza a pergunta pelo id
     }).then(pergunta => {
         if (pergunta != undefined) { // encontrada
-            res.render('pergunta');
+            res.render('pergunta', { pergunta });
         } else { // não encontrada
             res.redirect('/');
         }
