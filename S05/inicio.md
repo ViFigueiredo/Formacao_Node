@@ -15,5 +15,6 @@ npm init -> cria o arquivo de identificação e estrutura do projeto -> package.
 
 npm i express -S -> instalação do express
 npm i ejs -S -> instalação do EJS
+npm i body-parser -S -> instalação do interceptador de envio de formulário
 
 

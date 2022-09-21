@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 app.set('view engine', 'ejs'); // informa qual o template engine a ser utilizado (pasta views por padrão)
 app.use(express.static('public')); // arquivos estáticos que não de responsabilidade do backend
+
+app.use(bodyParser.urlencoded({ extended: false })); // decodifica dados de formulário
+app.use(bodyParser.json()); // permite uso de json em envio de formulário (API)
 
 // Rota -> Página Inicial
 // views/index.ejs
@@ -15,7 +19,12 @@ app.get('/perguntar', (req, res) => {
 });
 
 app.post('/salvarpergunta', (req, res) => {
-    res.send('Formulário recebido.');
+    var titulo = req.body.titulo; // html name=titulo
+    var descricao = req.body.descricao; // html name=descricao
+    res.send('Formulário recebido!' + '<br>' +
+        'Titulo: ' + titulo + '<br>' +
+        'Descricao: ' + descricao
+    );
 });
 
 // Config server
