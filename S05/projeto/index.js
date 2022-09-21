@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 
 // Banco de dados
 const connection = require('./database/database');
+const perguntaModel = require('./database/Pergunta');
+
 connection
     .authenticate()
     .then(() => {
