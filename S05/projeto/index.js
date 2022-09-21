@@ -46,6 +46,19 @@ app.post('/salvarpergunta', (req, res) => {
         })
 });
 
+app.get('/pergunta/:id', (req, res) => {
+    var id = req.params.id;
+    Pergunta.findOne({
+        where: { id: id }
+    }).then(pergunta => {
+        if (pergunta != undefined) { // encontrada
+            res.render('pergunta');
+        } else { // não encontrada
+            res.redirect('/');
+        }
+    })
+})
+
 // Config server
 const porta = 8080;
 app.listen(porta, () => {
