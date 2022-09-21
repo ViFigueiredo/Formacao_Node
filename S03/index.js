@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/blog', (req, res) => {
-    res.send('Bem-vindo ao blog.')
+    res.send('Bem-vindo ao blog: www.guiadoprogramador.com.br')
 })
 
 app.get('/canal/youtube', (req, res) => {
