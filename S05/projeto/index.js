@@ -53,12 +53,26 @@ app.get('/pergunta/:id', (req, res) => {
         where: { id } // localiza a pergunta pelo id
     }).then(pergunta => {
         if (pergunta != undefined) { // encontrada
-            res.render('pergunta', { pergunta });
+            Resposta.findAll({
+                where: { perguntaId: pergunta.id }, // retorna todas as respostas que possuem o id em questão
+                order: [['id', 'DESC']] // ASC = crescente || DESC = decrescente
+            }).then(respostas => { res.render('pergunta', { pergunta, respostas }) }); // pergunta.ejs
+
         } else { // não encontrada
             res.redirect('/');
         }
     })
 })
+
+// Respondendo as perguntas
+app.post('/responder', (req, res) => {
+    var corpo = req.body.corpo;
+    var perguntaId = req.body.pergunta;
+    Resposta.create({ corpo, perguntaId })
+        .then(() => {
+            res.redirect(`/pergunta/${perguntaId}`); // redireciona para a pg da pergunta respondida
+        });
+});
 
 // Config server
 const porta = 8080;

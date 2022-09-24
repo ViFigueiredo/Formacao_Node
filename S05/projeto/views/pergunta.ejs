@@ -10,11 +10,33 @@
     <p> <%= pergunta.descricao %> </p>
     <hr>
     <h3> Responda </h3>
-    <form>
+    <form method="post" action="/responder">
       <label> Resposta: </label>
       <textarea class="form-control" name="corpo" placeholder="Digite sua resposta..."></textarea> <br>
+      <input type="hidden" name="pergunta" value="<%= pergunta.id %> ">
       <button type="submit" class="btn btn-primary"> Responder </button>
     </form>
+    <hr>
+    <h3> Respostas </h3>
+    <hr>
+
+    <% if (respostas.length <= 0) { %>
+    <!-- <p> <!%=  respostas.length  %> </p> -->
+    <div class="card">
+      <div class="card-body">
+        <P> Pergunta não respondida ainda. </P>
+      </div>
+    </div>
+    <% } else { %>
+    <% respostas.forEach(resposta => { %>
+    <div class="card">
+      <div class="card-body">
+        <P> <%= resposta.corpo %> </P>
+      </div>
+    </div> <br>
+    <% }) %>
+    <% } %>
+
   </div>
 
 </body>
