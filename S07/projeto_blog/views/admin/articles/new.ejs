@@ -1,0 +1,53 @@
+<%- include('../../includes/header') %>
+<%- include('../../includes/navbar') %>
+
+<div class="container">
+  <hr>
+  <div class="card">
+    <div class="card-header">
+      <h2> Novo Artigo </h2>
+    </div>
+    <div class="card-body">
+      <form method="post" action="/articles/save">
+        <input class="form-control" type="text" name="title" placeholder="Defina o título do artigo">
+
+        <label></label>
+        <select name="category" class="form-control">
+          <option selected> Selecione a categoria do artigo </option>
+          <% categories.forEach(category => { %>
+          <option value="<%= category.id %> "> <%= category.title %> </option>
+          <% }) %>
+        </select> <br>
+
+        <textarea class="form-control" id="article" name="body" placeholder="Escreva o artigo aqui!"></textarea> <br>
+        <button class="btn btn-success"> Cadastrar </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../../includes/footer') %>
+
+<script src="/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    language: 'pt_BR',
+    selector: "#article",
+    plugins: [
+      'advlist',
+      'autolink',
+      'link',
+      'image',
+      'lists',
+      'preview',
+      'searchreplace',
+      'wordcount',
+      'fullscreen',
+      'insertdatetime',
+      'media',
+      'save',
+      'table',
+      'emoticons',
+    ]
+  })
+</script>
