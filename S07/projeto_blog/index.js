@@ -44,17 +44,20 @@ app.use('/', categoriesController);
 app.use('/', articlesController);
 
 // Rota -> Slug/artigo
-app.use('/:slug', (req, res) => {
+app.get('/:slug', (req, res) => {
   let slug = req.params.slug;
   Article.findOne({
     where: { slug }
   }).then(article => {
     if (article != undefined) {
-      res.render('')
-    } else { }
-    res.redirect('/')
+      res.render('article', { article });
+    } else {
+      res.redirect('/');
+      // console.log(err);
+    }
   }).catch(err => {
     res.redirect('/');
+    // console.log(err);
   });
 });
 
