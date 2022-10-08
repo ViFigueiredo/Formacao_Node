@@ -49,10 +49,12 @@ app.use('/:slug', (req, res) => {
   Article.findOne({
     where: { slug }
   }).then(article => {
-    (article != undefined) ? res.render('') : res.redirect('/')
-    .catch(err => {
-      res.redirect('/');
-    });
+    if (article != undefined) {
+      res.render('')
+    } else { }
+    res.redirect('/')
+  }).catch(err => {
+    res.redirect('/');
   });
 });
 

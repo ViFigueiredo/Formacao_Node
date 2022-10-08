@@ -55,40 +55,8 @@ router.post('/articles/delete', (req, res) => { // deletar
             res.redirect('/admin/articles');
         }
     } else {
-        res.redirect('/admin/articles');
+        res.redirect('/admin/articles')
     }
 });
-
-// router.get('/admin/articles/edit/:id', (req, res) => { // editar
-//     let id = req.params.id;
-
-//     if (isNaN(id)) return res.redirect('/admin/articles');
-
-//     Article.findByPk(id, {
-//         include: [{model: Category}]
-//     }).then(article => {
-//         if (article != undefined) { // se é válido
-//             res.render('admin/articles/edit', { article })
-//         } else {
-//             res.redirect('/admin/articles');
-//         }
-//     }).catch(err => {
-//         res.redirect('/admin/articles');
-//     })
-// });
-
-// router.post('/articles/update', (req, res) => { // atualizar
-//     let id = req.body.id;
-//     let title = req.body.title;
-//     let body = req.body.body;
-//     let category = req.body.category;
-
-//     Article.update({ title, body, category, slug: slugify(title, {lower: true}) }, {
-//         where: { id }
-//     }).then(() => {
-//         res.redirect('/admin/articles');
-//     })
-// });
-
 
 module.exports = router;
