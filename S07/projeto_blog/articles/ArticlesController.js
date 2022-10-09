@@ -6,12 +6,12 @@ const router = express.Router();
 // Models
 const Category = require('../categories/Category');
 const Article = require('../articles/Article');
-const sluggify = require('slugify');
+const slugify = require('slugify');
 
 // Página Inicial
 router.get('/admin/articles', (req, res) => { // listar
     Article.findAll({
-        include: [{model: Category}] // inclui o model de categoria - {article.category.title}
+        include: [{ model: Category }] // inclui o model de categoria - {article.category.title}
     }).then(articles => {
         res.render('admin/articles/index', { articles });
     });
@@ -58,5 +58,42 @@ router.post('/articles/delete', (req, res) => { // deletar
         res.redirect('/admin/articles')
     }
 });
+
+router.get('/admin/articles/edit/:id', (req, res) => { // editar
+    let id = req.params.id;
+
+    Article.findByPk(id).then(article => {
+        if (article != undefined) { // se é válido
+            Category.findAll().then(categories => { // pesquisa todas as categorias
+                res.render('admin/articles/edit', { article, categories })
+            })
+        } else {
+            res.redirect('/admin/articles');
+        }
+    }).catch(err => {
+        res.redirect('/admin/articles');
+    })
+});
+
+router.post('/articles/update', (req, res) => { // atualizar
+    // capturando dados de formulário
+    let id = req.body.id;
+    let title = req.body.title;
+    let body = req.body.body;
+    let categoryId = req.body.category;
+
+    // console.log(id);
+    // console.log(title);
+    // console.log(body);
+    // console.log(categoryId);
+
+    Article.update({ title, slug: slugify(title, { lower: true }), body, categoryId }, {
+        where: { id }
+    }).then(() => {
+        res.redirect('/admin/articles');
+    })
+});
+
+
 
 module.exports = router;

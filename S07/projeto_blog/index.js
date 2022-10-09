@@ -32,8 +32,12 @@ const Article = require('./articles/Article');
 
 // Rota Inicial
 app.get('/', (req, res) => {
-  Article.findAll().then(articles => {
-    res.render("index", { articles });
+  Article.findAll({
+    order: [['id', 'desc']]
+  }).then(articles => {
+    Category.findAll().then(categories => {
+      res.render("index", { articles, categories });
+    })
   })
 });
 
@@ -50,14 +54,33 @@ app.get('/:slug', (req, res) => {
     where: { slug }
   }).then(article => {
     if (article != undefined) {
-      res.render('article', { article });
+      Category.findAll().then(categories => {
+        res.render("article", { article, categories });
+      })
     } else {
       res.redirect('/');
-      // console.log(err);
     }
   }).catch(err => {
     res.redirect('/');
-    // console.log(err);
+  });
+});
+
+// Rota - artigos por categorias
+app.get('/category/:slug', (req, res) => {
+  let slug = req.params.slug;
+  Category.findOne({
+    where: { slug },
+    include: [{ model: Article }] // join entre tabelas
+  }).then(category => {
+    if (category != undefined) {
+      Category.findAll().then(categories => {
+        res.render('index', { articles: category.articles, categories }) // categoria de artigos
+      })
+    } else {
+      res.redirect('/');
+    }
+  }).catch(err => {
+    res.redirect('/');
   });
 });
 
