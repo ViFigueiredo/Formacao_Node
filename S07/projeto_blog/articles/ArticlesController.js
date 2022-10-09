@@ -80,18 +80,20 @@ router.post('/articles/update', (req, res) => { // atualizar
     let id = req.body.id;
     let title = req.body.title;
     let body = req.body.body;
-    let categoryId = req.body.category;
+    let category = req.body.category;
 
     // console.log(id);
     // console.log(title);
     // console.log(body);
     // console.log(categoryId);
 
-    Article.update({ title, slug: slugify(title, { lower: true }), body, categoryId }, {
+    Article.update({ title, slug: slugify(title, { lower: true }), body, category }, {
         where: { id }
     }).then(() => {
         res.redirect('/admin/articles');
-    })
+    }).catch(err => {
+        res.redirect('/');
+    });
 });
 
 
