@@ -96,6 +96,32 @@ router.post('/articles/update', (req, res) => { // atualizar
     });
 });
 
+// Paginação
+router.get('/articles/page/:num', (req, res) => {
+    let page = req.params.num;
+
+    var qtdArtigos = 2; // qtd de artigos por pagina
+
+    if (isNaN(page) || page == 1) { // params.num for numero ou 1
+        var offset = 0; // 0 ~ 1
+    } else {
+        offset = (parseInt(page) -1) * qtdArtigos;
+    }
+
+    Article.findAndCountAll({ // retorna todos os artigos e a contagem total
+        limit: qtdArtigos, // limita a quantidade total de artigos
+        offset: offset, // retorna os proximos valores baseado no delimitador de artigos (qtdArtigos)
+        order: [['id', 'DESC']]
+    }).then(articles => {
+
+        var next;
+        (offset + qtdArtigos >= articles.count) ? next = false : next = true; // se a soma de offset + qtd de artigos por pagina for maior que a quantidade total
+        let result = { next, articles };
+
+        res.json(result);
+    })
+})
+
 
 
 module.exports = router;
