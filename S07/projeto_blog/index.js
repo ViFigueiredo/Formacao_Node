@@ -36,15 +36,15 @@ connection.authenticate()
 
 // Controllers
 const indexController = require('./src/controllers/IndexController');
+const usersController = require('./src/controllers/UsersController');
 const categoriesController = require('./src/controllers/CategoriesController');
 const articlesController = require('./src/controllers/ArticlesController');
-const usersController = require('./src/controllers/UsersController');
 
 // Rotas
 app.use('/', indexController); // Rota -> Index
+app.use('/', usersController);// Rota -> Usuários
 app.use('/', categoriesController); // Rota -> Categorias
 app.use('/', articlesController);// Rota -> Artigos
-app.use('/', usersController);// Rota -> Usuários
 
 // Server
 const port = 8080;
