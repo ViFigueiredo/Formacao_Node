@@ -14,6 +14,17 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Sessões
+const session = require('express-session');
+app.use(session({
+  secret: 'QualquerCoisaAleatória',
+  cookie: {
+    maxAge: 30000
+  },
+  resave: true,
+  saveUninitialized: true
+}));
+
 // Banco de Dados
 const connection = require('./src/database/database');
 connection.authenticate()
