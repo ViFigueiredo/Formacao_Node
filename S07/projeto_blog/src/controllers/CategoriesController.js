@@ -85,25 +85,5 @@ router.post('/categories/update', (req, res) => { // atualizar
     })
 });
 
-router.get('/category/:slug', (req, res) => { // Rota - Artigos por categorias
-    let slug = req.params.slug;
-    Category.findOne({
-        where: { slug },
-        include: [{ model: Article }] // join entre tabelas
-    }).then(category => {
-        if (category != undefined) {
-            Category.findAll().then(categories => {
-                res.render('index', { articles: category.articles, categories }) // categoria de artigos
-            })
-        } else {
-            res.redirect('/');
-        }
-    }).catch(err => {
-        res.redirect('/');
-    });
-});
-
-
-
 module.exports = router;
 
