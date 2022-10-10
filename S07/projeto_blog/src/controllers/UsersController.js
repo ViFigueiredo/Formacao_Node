@@ -11,7 +11,9 @@ const User = require('../models/User');
 
 // Usuários
 router.get('/admin/users', (req, res) => { // listar
-    res.send('Listagem de usuários');
+    User.findAll().then(users => {
+        res.render('admin/users/index', { users });
+    });
 });
 
 router.get('/admin/users/create', (req, res) => { // criar - pagina

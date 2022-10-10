@@ -17,4 +17,8 @@ router.get('/', (req, res) => { // Rota - Página Inicial
     })
 });
 
+router.get('/admin', (req, res) => { // Rota - Página Admin
+    res.render('admin/index');
+});
+
 module.exports = router;
