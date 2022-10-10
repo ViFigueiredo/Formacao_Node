@@ -9,6 +9,7 @@ const slugify = require('slugify');
 
 // Model de categorias
 const Category = require('../models/Category');
+const Article = require('../models/Article');
 
 // Página inicial - Cria nova categoria
 router.get('/admin/categories/new', (req, res) => {
