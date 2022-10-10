@@ -105,10 +105,10 @@ router.get('/articles/page/:num', (req, res) => {
     if (isNaN(page) || page == 1) { // params.num for numero ou 1
         var offset = 0; // 0 ~ 1
     } else {
-        offset = (parseInt(page) -1) * qtdArtigos;
+        offset = (parseInt(page) - 1) * qtdArtigos;
     }
 
-    Article.findAndCountAll({ // retorna todos os artigos e a contagem total
+    Article.findAndCountAll({ // retorna todos os artigos e a contagem total (count/rows)
         limit: qtdArtigos, // limita a quantidade total de artigos
         offset: offset, // retorna os proximos valores baseado no delimitador de artigos (qtdArtigos)
         order: [['id', 'DESC']]
@@ -118,7 +118,11 @@ router.get('/articles/page/:num', (req, res) => {
         (offset + qtdArtigos >= articles.count) ? next = false : next = true; // se a soma de offset + qtd de artigos por pagina for maior que a quantidade total
         let result = { next, articles };
 
-        res.json(result);
+        Category.findAll().then(categories => {
+            res.render('admin/articles/page', { result, categories })
+        });
+
+        // res.json(result);
     })
 })
 
