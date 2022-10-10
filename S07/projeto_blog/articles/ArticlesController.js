@@ -116,7 +116,7 @@ router.get('/articles/page/:num', (req, res) => {
 
         var next;
         (offset + qtdArtigos >= articles.count) ? next = false : next = true; // se a soma de offset + qtd de artigos por pagina for maior que a quantidade total
-        let result = { next, articles };
+        let result = { page: parseInt(page), next, articles };
 
         Category.findAll().then(categories => {
             res.render('admin/articles/page', { result, categories })

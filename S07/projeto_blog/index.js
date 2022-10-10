@@ -33,11 +33,12 @@ const Article = require('./articles/Article');
 // Rota Inicial
 app.get('/', (req, res) => {
   Article.findAll({
-    order: [['id', 'desc']]
+    order: [['id', 'desc']],
+    limit: 4
   }).then(articles => {
     Category.findAll().then(categories => {
       res.render("index", { articles, categories });
-    })
+    });
   })
 });
 
