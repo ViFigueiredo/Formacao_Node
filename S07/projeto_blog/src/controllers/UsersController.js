@@ -43,4 +43,32 @@ router.post('/users/create', (req, res) => { // criar - envio de formulário
     })
 });
 
+router.get('/admin/users/edit/:id', (req, res) => { // editar
+    let id = req.params.id;
+
+    if (isNaN(id)) return res.redirect('/admin/users');
+
+    User.findByPk(id).then(user => {
+        if (user != undefined) { // se é válido
+            res.render('admin/users/edit', { user })
+        } else {
+            res.redirect('/admin/users');
+        }
+    }).catch(err => {
+        res.redirect('/admin/users');
+    })
+});
+
+router.post('/users/update', (req, res) => { // atualizar
+    let id = req.body.id;
+    let email = req.body.email;
+
+    User.update({ email }, {
+        where: { id }
+    }).then(() => {
+        res.redirect('/admin/users');
+    })
+});
+
+
 module.exports = router;
