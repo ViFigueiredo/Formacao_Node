@@ -9,7 +9,7 @@
 
   <br><br>
 
-  <table class="table table-bordered">
+  <table class="table table-bordered text-center">
     <thead>
       <tr>
         <th> ID </th>
@@ -22,10 +22,10 @@
     <tbody>
       <% categories.forEach(category => { %>
       <tr>
-        <th> <%= category.id %> </th>
-        <th> <%= category.title %> </th>
-        <th> <%= category.slug %> </th>
-        <th>
+        <td class="align-middle"> <%= category.id %> </td>
+        <td class="align-middle"> <%= category.title %> </td>
+        <td class="align-middle"> <%= category.slug %> </th>
+        <td class="align-middle">
 
           <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning"> Editar </a>
 
@@ -34,7 +34,7 @@
             <button class="btn btn-danger"> Deletar </button>
           </form>
 
-        </th>
+        </td>
       </tr>
       <% }) %>
     </tbody>
