@@ -2,11 +2,8 @@
 const express = require('express');
 const app = express();
 
-// Controlles
-const categoriesController = require('./categories/CategoriesController');
-const articlesController = require('./articles/ArticlesController');
-
 // View Engine
+app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 // Arquivos Estáticos
@@ -18,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Banco de Dados
-const connection = require('./database/database');
+const connection = require('./src/database/database');
 connection.authenticate()
   .then(() => {
     console.log('Conexão feita com sucesso!');
@@ -26,64 +23,17 @@ connection.authenticate()
     console.log(error);
   });
 
-// Models
-const Category = require('./categories/Category');
-const Article = require('./articles/Article');
+// Controllers
+const indexController = require('./src/controllers/IndexController');
+const categoriesController = require('./src/controllers/CategoriesController');
+const articlesController = require('./src/controllers/ArticlesController');
+const usersController = require('./src/controllers/UsersController');
 
-// Rota Inicial
-app.get('/', (req, res) => {
-  Article.findAll({
-    order: [['id', 'desc']],
-    limit: 4
-  }).then(articles => {
-    Category.findAll().then(categories => {
-      res.render("index", { articles, categories });
-    });
-  })
-});
-
-// Rota -> Categorias
-app.use('/', categoriesController);
-
-// Rota -> Artigos
-app.use('/', articlesController);
-
-// Rota -> Slug/artigo
-app.get('/:slug', (req, res) => {
-  let slug = req.params.slug;
-  Article.findOne({
-    where: { slug }
-  }).then(article => {
-    if (article != undefined) {
-      Category.findAll().then(categories => {
-        res.render("article", { article, categories });
-      })
-    } else {
-      res.redirect('/');
-    }
-  }).catch(err => {
-    res.redirect('/');
-  });
-});
-
-// Rota - artigos por categorias
-app.get('/category/:slug', (req, res) => {
-  let slug = req.params.slug;
-  Category.findOne({
-    where: { slug },
-    include: [{ model: Article }] // join entre tabelas
-  }).then(category => {
-    if (category != undefined) {
-      Category.findAll().then(categories => {
-        res.render('index', { articles: category.articles, categories }) // categoria de artigos
-      })
-    } else {
-      res.redirect('/');
-    }
-  }).catch(err => {
-    res.redirect('/');
-  });
-});
+// Rotas
+app.use('/', indexController); // Rota -> Index
+app.use('/', categoriesController); // Rota -> Categorias
+app.use('/', articlesController);// Rota -> Artigos
+app.use('/', usersController);// Rota -> Usuários
 
 // Server
 const port = 8080;

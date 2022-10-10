@@ -4,8 +4,8 @@ const express = require('express');
 const router = express.Router();
 
 // Models
-const Category = require('../categories/Category');
-const Article = require('../articles/Article');
+const Category = require('../models/Category');
+const Article = require('../models/Article');
 const slugify = require('slugify');
 
 // Página Inicial
@@ -91,6 +91,23 @@ router.post('/articles/update', (req, res) => { // atualizar
         where: { id }
     }).then(() => {
         res.redirect('/admin/articles');
+    }).catch(err => {
+        res.redirect('/');
+    });
+});
+
+router.get('/:slug', (req, res) => { // Rota - Slug/artigo
+    let slug = req.params.slug;
+    Article.findOne({
+        where: { slug }
+    }).then(article => {
+        if (article != undefined) {
+            Category.findAll().then(categories => {
+                res.render("article", { article, categories });
+            })
+        } else {
+            res.redirect('/');
+        }
     }).catch(err => {
         res.redirect('/');
     });

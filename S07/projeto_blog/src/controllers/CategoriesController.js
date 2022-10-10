@@ -8,7 +8,7 @@ const router = express.Router();
 const slugify = require('slugify');
 
 // Model de categorias
-const Category = require('./Category');
+const Category = require('../models/Category');
 
 // Página inicial - Cria nova categoria
 router.get('/admin/categories/new', (req, res) => {
@@ -23,7 +23,7 @@ router.post('/categories/save', (req, res) => {
 
         Category.create({
             title: title,
-            slug: slugify(title, {lower: true})
+            slug: slugify(title, { lower: true })
         }).then(() => {
             res.redirect('/admin/categories');
         });
@@ -77,12 +77,31 @@ router.post('/categories/update', (req, res) => { // atualizar
     let id = req.body.id;
     let title = req.body.title;
 
-    Category.update({ title, slug: slugify(title, {lower: true}) }, {
+    Category.update({ title, slug: slugify(title, { lower: true }) }, {
         where: { id }
     }).then(() => {
         res.redirect('/admin/categories');
     })
 });
+
+router.get('/category/:slug', (req, res) => { // Rota - Artigos por categorias
+    let slug = req.params.slug;
+    Category.findOne({
+        where: { slug },
+        include: [{ model: Article }] // join entre tabelas
+    }).then(category => {
+        if (category != undefined) {
+            Category.findAll().then(categories => {
+                res.render('index', { articles: category.articles, categories }) // categoria de artigos
+            })
+        } else {
+            res.redirect('/');
+        }
+    }).catch(err => {
+        res.redirect('/');
+    });
+});
+
 
 
 module.exports = router;

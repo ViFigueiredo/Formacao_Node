@@ -1,0 +1,20 @@
+<%- include('../../includes/header') %>
+<%- include('../../includes/navbar') %>
+
+<div class="container">
+  <hr>
+  <div class="card">
+    <div class="card-header">
+      <h2> Criação de Usuário </h2>
+    </div>
+    <div class="card-body">
+        <form method="post" action="/users/create">
+          <input class="form-control" type="email" name="email" placeholder="Digite seu e-mail"> <br>
+          <input class="form-control" type="password" name="password" placeholder="Digite a nova senha"> <br>
+          <button class="btn btn-success btn-block" type="submit"> Cadastrar </button>
+        </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../../includes/footer') %>
