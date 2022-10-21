@@ -1,0 +1,4 @@
+# Tipos de arquivos
+
+> Texto -> txt, html, script(js, java, c#, etc), xml, md, json
+> Binários -> pdf, exe, video -> arquivo compilados em bits
