@@ -1,7 +1,6 @@
 /* Módulos
 
 template engine -> npm i ejs --save
-mover arquivos -> npm i fs-extra
 
 */
 
@@ -10,6 +9,7 @@ var Writer = require('./classes/Writer')
 var Processor = require('./classes/Processor')
 var HtmlParser = require('./classes/HtmlParser');
 var Table = require('./classes/Table');
+var pdfWriter = require('./classes/pdfWriter');
 
 var leitor = new Reader();
 var escritor = new Writer();
@@ -27,6 +27,7 @@ async function main(params) {
     var html = await HtmlParser.Parse(pessoas); // converte os dados em html
 
     escritor.Write(Date.now() + '.html', html);
+    pdfWriter.WritePDF(Date.now() + '.pdf', html);
 
     // console.log(pessoas.header);
     // console.log(pessoas.rows);
