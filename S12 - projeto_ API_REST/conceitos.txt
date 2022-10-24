@@ -1,0 +1,22 @@
+# REST
+1. Cliente servidor -> não pode utilizar padrão MVC - só pode atuar como servidor
+2. Stateless -> não guarda informações de requisição do cliente (http)
+3. Cacheável -> uso de cache para otimizar desempenho (não muito utilizavel)
+4. Saber trabalhar com camadas -> não importa se existe algum middleware, ponte, barreita, etc
+5. Interface uniforme e direta -> rotas ou endpoints precisam ser objetivas
+    ERRADO > http://meusite.com/getClientes/todos
+    CORRETO > http://meusite.com/clientes/
+    CORRETO > http://meusite.com/cliente/1
+6. Pode retornar json, xml, arquivos
+
+Níveis:
+0 - the swamp of pox
+1 - resources
+2 - http verbs
+3 - hypermedia controls
+
+# RESTful
+É uma padrãozinação REST seguinte TODAS as especificações (1-6 + HATEOAS).
+
+# HATEOAS
+Retorno de uma API RESTful onde além dos dados solicitados temos uma lista de ações possiveis (rotas).
