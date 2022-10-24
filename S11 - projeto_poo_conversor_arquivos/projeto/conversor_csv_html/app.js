@@ -1,6 +1,7 @@
 /* Módulos
 
-ejs -> npm i ejs --save
+template engine -> npm i ejs --save
+mover arquivos -> npm i fs-extra
 
 */
 
@@ -25,7 +26,7 @@ async function main(params) {
 
     var html = await HtmlParser.Parse(pessoas); // converte os dados em html
 
-    escritor.Write(Date.now()+'.html', html);
+    escritor.Write(Date.now() + '.html', html);
 
     // console.log(pessoas.header);
     // console.log(pessoas.rows);
