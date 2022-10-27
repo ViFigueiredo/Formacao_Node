@@ -1,9 +1,25 @@
 <template>
-  <!-- Reatividade
-Sempre que o dado muda, suas referências mudam.
+  <!-- Data Binding(two way)
+  
+O dado muda e interfere em suas referências. Serve para leitura/gravação. Utilizado mais em formulários.
+
+v-model=""
+
  -->
 
   <div id="cliente">
+    <input type="text" v-model="nome" />
+    <hr />
+    <input type="text" v-model="descricao" />
+    <hr />
+    <h2 id="cliente-nome">{{ nome }}</h2>
+    <h3>Descrição cliente:{{ descricao }}</h3>
+
+    <hr />
+    <h2 id="cliente-nome">{{ nome }}</h2>
+    <h3>Descrição cliente:{{ descricao }}</h3>
+
+    <hr />
     <h2 id="cliente-nome">{{ nome }}</h2>
     <h3>Descrição cliente:{{ descricao }}</h3>
 
