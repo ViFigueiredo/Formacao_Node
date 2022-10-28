@@ -1,22 +1,11 @@
 <template>
-  <!-- Exemplo usando prop object -->
   <div class="app">
     <h1>Guia Clientes</h1>
-    <!-- prop obj também aceita v-model -->
-    <input type="text" v-model="cliente.nome" />
-    <br />
-    <br />
-    <input type="text" v-model="cliente.email" />
-    <br />
-    <br />
-    <input type="text" v-model="cliente.idade" />
-
-    <hr />
-
-    <!-- props obj -->
+    <!-- props obj recebendo uma prop condicional -->
+    <!-- condicional precisa ser bind -->
+    <Cliente :cliente="cliente" :showIdade="true" />
     <Cliente :cliente="cliente" />
-    <Cliente :cliente="cliente" />
-    <Cliente :cliente="cliente" />
+    <Cliente :cliente="cliente" :showIdade="true" />
   </div>
 </template>
 
