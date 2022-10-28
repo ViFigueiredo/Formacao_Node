@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <div class="column is-full">
+    <div class="logo-container">
+      <img class="logo" src="./assets/img/logo.svg" alt="" />
+    </div>
+    <div class="column is-half is-offset-one-quarter">
       <div v-for="(poke, index) in pokemons" :key="index">
         <Pokemon :name="poke.name" :url="poke.url" :num="index + 1" />
       </div>
@@ -34,4 +37,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.logo-container {
+  background: #ccc;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 0;
+  margin-bottom: 20px;
+}
+
+.logo {
+  max-width: 300px;
+}
+</style>

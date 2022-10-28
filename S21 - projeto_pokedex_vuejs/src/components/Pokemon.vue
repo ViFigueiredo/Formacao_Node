@@ -15,7 +15,7 @@
         </div>
 
         <div class="content">
-          <button class="button is-primary" @click="mudarSprite">
+          <button class="button is-medium is-fullwidth" @click="mudarSprite">
             Mudar Sprite
           </button>
         </div>
