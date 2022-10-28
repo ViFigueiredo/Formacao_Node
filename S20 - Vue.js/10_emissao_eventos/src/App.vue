@@ -10,10 +10,10 @@
     <button @click="cadastrarUsuario">Cadastrar</button>
     <hr />
 
-    <div class="vFor" v-for="(cliente, index) in Clientes" :key="cliente.id">
+    <div class="vFor" v-for="(cliente, index) in clientes" :key="cliente.id">
       <!-- <p>Testando v-for</p> -->
       <h4>{{ index + 1 }}</h4>
-      <Cliente :cliente="cliente" />
+      <Cliente :cliente="cliente" @meDelete="deletarCliente" />
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
       nomeField: "",
       emailField: "",
       idadeField: 0,
-      Clientes: [],
+      clientes: [],
     };
   },
   components: {
@@ -42,10 +42,10 @@ export default {
         this.nomeField == " " ||
         this.nomeField.length < 3
       ) {
-        // console.log("Erro de validação!");
+        console.log("Erro de validação!");
         this.deuErro = true;
       } else {
-        this.Clientes.push({
+        this.clientes.push({
           nome: this.nomeField,
           email: this.emailField,
           idade: this.idadeField,
@@ -56,6 +56,17 @@ export default {
         this.idadeField = 0;
         this.deuErro = false;
       }
+    },
+    deletarCliente: function ($event) {
+      console.log("Recebendo evento no elemento pai.");
+      console.log($event);
+      $event.component.isPremium = false;
+      console.log($event.idDoCliente);
+      $event.component.testar();
+
+      var id = $event.idDoCliente;
+      var novoArray = this.clientes.filter(cliente => cliente.id != id);
+      this.clientes = novoArray;
     },
   },
 };
