@@ -9,6 +9,7 @@
 <script>
 import axios from "axios";
 import Pokemon from "./components/Pokemon.vue";
+
 export default {
   // retorna um obj
   data() {
