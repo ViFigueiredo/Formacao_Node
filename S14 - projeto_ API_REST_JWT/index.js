@@ -1,10 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+
 const app = express();
 
-const cors = require('cors');
-app.use(cors());
+const jwtSecret = 'minha _secret_jwt';
 
-const bodyParser = require('body-parser');
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -136,8 +139,24 @@ app.post('/auth', (req, res) => {
         if (user != undefined) {
 
             if (user.password == password) {
-                res.status(200);
-                res.json({ token: 'Token falso.' })
+
+                jwt.sign(
+                    { // payload
+                        id: user.id,
+                        email: user.email
+                    }, jwtSecret,
+                    { // buffer - tempo de validade do token
+                        expiresIn: '24h'
+                    }, (err, token) => { // callback
+                        if (err) {
+                            res.status(400);
+                            res.json({ err: 'Falha interna.' });
+                        } else {
+                            res.status(200);
+                            res.json({ token: token });
+                        }
+                    })
+
             } else {
                 res.status(401);
                 res.json({ err: 'Token inválido.' })
