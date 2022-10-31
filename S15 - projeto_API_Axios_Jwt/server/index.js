@@ -82,7 +82,7 @@ function middlewareAuth(req, res, next) {
 
 app.get('/games', middlewareAuth, (req, res) => {
     res.statusCode = 200;
-    res.json({ user: req.loggedUser, games: DB.games }); // podemos acessar as variaveis do middleware se ele estiver presente
+    res.json(DB.games); // podemos acessar as variaveis do middleware se ele estiver presente
 })
 
 app.get('/game/:id', (req, res) => { // listar
@@ -185,7 +185,7 @@ app.post('/auth', (req, res) => {
                             res.json({ err: 'Falha interna.' });
                         } else {
                             res.status(200);
-                            res.json({ token: token });
+                            res.json({ token: token }); // retorna o token criado
                         }
                     })
 
