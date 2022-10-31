@@ -1,35 +1,44 @@
 var axiosConfig = {
     headers: {
-        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJlbWFpbDFAZW1haWwuY29tIiwiaWF0IjoxNjY3MjM0ODU4LCJleHAiOjE2NjczMjEyNTh9.qw7PAyp639JCjuvSlTqysxjAOOCGVG3R245FcOHs__s'
+        Authorization: 'Bearer ' + localStorage.getItem('token')
     }
 }
 
-function login(params) {
+function logout() {
+    localStorage.setItem('token', '');
+    location.reload();
+}
+
+
+function login() {
     var emailField = document.getElementById('email');
     var passwordField = document.getElementById('password');
 
     var email = emailField.value;
     var password = passwordField.value;
 
-    axios.post('http://localhost:3000/auth',{
+    axios.post('http://localhost:3000/auth', {
         email,
         password
     }).then(res => {
-        alert('Logado com sucesso!');
+        // alert('Logado com sucesso!');
         var token = res.data.token;
-        console.log(res.data);
+        localStorage.setItem('token', token);
+        // axiosConfig.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+        // console.log(res.data);
+        location.reload();
     }).catch(err => {
         alert('Login inválido!');
-        console.log(err);
+        // console.log(err);
     });
 }
-
 axios.get('http://localhost:3000/games', axiosConfig).then(response => {
     var games = response.data;
     var list = document.getElementById('games');
 
     // console.log(games.length);
     if (games.length == 0) {
+        var item = document.createElement('li');
         item.innerHTML = 'Lista de games vazia.';
         list.appendChild(item);
     }
@@ -95,7 +104,7 @@ function editGame() {
 
     var id = idInput.value;
 
-    axios.put('http://localhost:3000/game/' + id, game).then(response => {
+    axios.put('http://localhost:3000/game/' + id, game,).then(response => {
         if (response.status == 200) {
             alert('Game atualizado!');
             location.reload();
@@ -108,7 +117,7 @@ function editGame() {
 function deleteGame(ListItem) {
     var id = ListItem.getAttribute('data-id');
     // console.log(id);
-    axios.delete('http://localhost:3000/game/' + id).then(response => {
+    axios.delete('http://localhost:3000/game/' + id, axiosConfig).then(response => {
         if (response.status == 200) {
             alert('Game deletado!');
             location.reload();
