@@ -57,7 +57,16 @@ app.get('/game/:id', (req, res) => { // listar
 });
 
 app.post('/game', (req, res) => { // criar
-    var { id, title, price, year } = req.body;
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    var { title, price, year } = req.body;
+
+    var id = getRandomInt(1, 100);
 
     DB.games.push({ id, title, price, year });
     res.sendStatus(200);

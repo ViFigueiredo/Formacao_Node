@@ -9,9 +9,15 @@
 </head>
 
 <body>
-    <hr>
-    <h4> Lista de Games </h4>
-    <ul id="games"></ul>
+  <hr>
+  <h4> Lista de Games </h4>
+  <ul id="games"></ul>
+  <hr>
+  <h4> Novo game </h4>
+  <input type="text" name="title" id="title" placeholder="Titulo"> <br>
+  <input type="number" name="year" id="year" placeholder="Ano"> <br>
+  <input type="number" name="price" id="price" placeholder="Preço"> <br>
+  <button type="button" onclick="createGame()"> Criar </button>
 
   <script src="axios.js"></script>
   <script src="index.js"></script>
