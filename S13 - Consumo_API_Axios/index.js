@@ -4,6 +4,12 @@ axios.get('http://localhost:3000/games').then(response => {
 
     games.forEach(game => {
         var item = document.createElement('li');
+
+        item.setAttribute('data-id', game.id);
+        item.setAttribute('data-title', game.title);
+        item.setAttribute('data-year', game.year);
+        item.setAttribute('data-price', game.price);
+
         item.innerHTML = game.id + ' - ' + game.title + ' - $' + game.price;
         list.appendChild(item);
         console.log(game);
