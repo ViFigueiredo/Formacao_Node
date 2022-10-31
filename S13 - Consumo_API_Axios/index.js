@@ -2,9 +2,15 @@ axios.get('http://localhost:3000/games').then(response => {
     var games = response.data;
     var list = document.getElementById('games');
 
-    games.forEach(game => {
-        var item = document.createElement('li');
+    var item = document.createElement('li');
 
+    // console.log(games.length);
+    if (games.length == 0) {
+        item.innerHTML = 'Lista de games vazia.';
+        list.appendChild(item);
+    }
+
+    games.forEach(game => {
         item.setAttribute('data-id', game.id);
         item.setAttribute('data-title', game.title);
         item.setAttribute('data-year', game.year);
@@ -20,17 +26,25 @@ axios.get('http://localhost:3000/games').then(response => {
 
         item.appendChild(deleteBtn);
         list.appendChild(item);
-        console.log(game);
+        // console.log(game);
     });
-    console.log(response);
+    // console.log(response);
 }).catch(error => {
     console.log(error);
 });
 
 function deleteGame(ListItem) {
-    var id = listItem.getAttribute('data-id');
-    console.log(ListItem);
-
+    var id = ListItem.getAttribute('data-id');
+    // console.log(id);
+    axios.delete('http://localhost:3000/game/' + id).then(response => {
+        if (response.status == 200) {
+            alert('Game deletado!');
+            location.reload();
+        }
+    }
+    ).catch(error => {
+        console.log(error);
+    });
 }
 
 function createGame() {
@@ -53,5 +67,5 @@ function createGame() {
         console.log(error);
     });
 
-    console.log(game);
+    // console.log(game);
 }
