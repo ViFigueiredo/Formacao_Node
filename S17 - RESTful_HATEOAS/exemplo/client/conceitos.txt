@@ -1,0 +1,8 @@
+# API utilizada: S12 - projeto_ API_REST/projeto
+
+# Existem diversas formas de consumo de api (requisições http):
+
+1. ajax puro
+2. ajax + jquery
+3. fetch api javascript puro
+4. axios -> mais moderna

@@ -1,0 +1,41 @@
+> Hypermedia -> ligação entre uma midia e outra (links que apontam pra outras fontes)
+
+> HATEOAS -> último passo de migração de uma REST para RESTful
+    {
+        "id": Number,
+        "data": Obj,
+        "links": [ -> hateoas
+            {
+                href: "String",
+                Rel: "String",
+                Method: "GET"
+            },
+            {
+                href: "String",
+                Rel: "String",
+                Method: "POST"
+            },
+            ...
+        ]
+    }
+
+> Vantagens -> indexação de ações, links, methodos e dados através de variáveis mutáveis. Torna o frontend mais flexível a mudanças em suas requisições ao backend. 
+
+// Requisição dinâmica
+axios.get(linkAPI.delete_employee,());
+
+// Mudança 2020
+var linkAPI = {
+    delete_employee: {
+        link: "http://localhost:123/employee",
+        method: "DELETE"
+    }
+}
+
+// Mudança 2021
+var linkAPI = {
+    delete_employee: {
+        link: "http://localhost:123/employee",
+        method: "DELETE"
+    }
+}
