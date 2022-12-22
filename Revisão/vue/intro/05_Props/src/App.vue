@@ -1,35 +1,30 @@
 <template>
   <div id="app">
-    <!-- testando reatividade alterando o valor de props utilizando two way data binding -->
-    <!-- <p><input type="text" v-model="email"/></p> -->
-
-    <!-- renderiza o component -->
-    <!-- passando valores para as props do component cliente -->
-    <Cliente nome="Vinicius Figueiredo" email="email@email.com" idade="29"/>
-
-    <!-- passando valores de props como objeto -->
-    <Cliente :cliente="clienteObj"/>
+    <!-- passando props para os componentes -->
+    <!-- testando reatividade -->
+    <p><input type="text" v-model="nomeCliente2.nome" /></p>
+    <!-- <Cliente :nome="nomeCliente1" email="cliente1@email.com" idade="15" /> -->
+    <Cliente :cliente="nomeCliente2" />
+    <!-- <Cliente nome="Cliente 3" email="cliente3@email.com" idade="35" /> -->
   </div>
 </template>
 
 <script>
-/* importa os comoponentes de /components */
 import Cliente from "./components/Cliente.vue";
 export default {
   name: "App",
-  data(){
+  data() {
+    /* passando valores como data binding na prop */
     return {
-      email: "nome.sobrenome@email.com",
-      clienteObj: {
-        nome: "Lucas Chabude",
-        email: "lucas.chabude@email.com",
-        idade: 23
-      }
-    }
+      nomeCliente1: "Cliente Um",
+      nomeCliente2: {
+        nome: "Cliente 2",
+        email: "cliente2@email.com",
+        idade: 25,
+      },
+    };
   },
   components: {
-    /* exporta para o main.js todos dos componentes importados */
-    Cliente,
     Cliente,
   },
 };
