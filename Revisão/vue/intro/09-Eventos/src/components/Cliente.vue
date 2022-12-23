@@ -1,0 +1,50 @@
+<template>
+  <div :class="{ cliente: !isPremium, 'cliente-premium': isPremium }">
+    <h4>Nome: {{ cliente.nome }}</h4>
+    <hr />
+    <p>E-mail: {{ cliente.email }}</p>
+    <p v-if="showIdade">Idade: {{ cliente.idade }}</p>
+    <p v-else>Escondeu a idade!</p>
+    <button @click="mudarCor($event)">Mudar cor!</button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isPremium: false,
+    };
+  },
+  props: {
+    cliente: Object,
+    showIdade: Boolean,
+  },
+  methods: {
+    mudarCor: function ($event) {
+      // console.log('CHAMANDO EVENTO!');
+      console.log($event);
+
+      /* this -> refere-se ao data() do proprio componente */
+      this.isPremium = !this.isPremium;
+    },
+  },
+};
+</script>
+
+<style scoped>
+.cliente {
+  margin-bottom: 2%;
+  padding: 2%;
+  background-color: #ccc;
+  max-width: 70%;
+}
+
+.cliente-premium {
+  margin-bottom: 2%;
+  padding: 2%;
+  background-color: black;
+  color: goldenrod;
+  max-width: 70%;
+}
+</style>
