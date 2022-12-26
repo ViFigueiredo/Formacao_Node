@@ -12,7 +12,11 @@
     <div v-for="cliente in clientes" :key="cliente.id">
       <!-- @meDelete é um evento escutado no componente filho -->
       <!-- $event é um parametro reservado que devolve todos os dados do component (opcional) -->
-      <Cliente :cliente="cliente" showIdade @meDelete="deletarUsuario($event)" />
+      <Cliente
+        :cliente="cliente"
+        showIdade
+        @meDelete="deletarUsuario($event)"
+      />
     </div>
   </div>
 </template>
@@ -27,12 +31,14 @@ export default {
       nomeField: '',
       emailField: '',
       idadeField: 0,
-      clientes: [{
-        id: Date.now() /* data atual em milissegundos */,
+      clientes: [
+        {
+          id: Date.now() /* data atual em milissegundos */,
           nome: 'Cliente 1',
           email: 'cliente1@email.com',
-          idade: 66
-      }],
+          idade: 66,
+        },
+      ],
     };
   },
   components: {
@@ -45,8 +51,7 @@ export default {
         this.nomeField == ' ' ||
         this.nomeField.length < 3
       ) {
-        this.deuErro = true,
-        console.log('Erro de validação!');
+        (this.deuErro = true), console.log('Erro de validação!');
       } else {
         this.clientes.push({
           id: Date.now() /* data atual em milissegundos */,
@@ -66,7 +71,7 @@ export default {
       // $event.component.isPremium = true;
 
       /* capturando ID do component pelo evento */
-      console.log("ID: " + $event.idDoCliente);
+      console.log('ID: ' + $event.idDoCliente);
 
       /* chamando um método dentro de outro método do componente filho */
       // $event.component.testar()
@@ -74,10 +79,10 @@ export default {
       /* captura o id do elemento de um componente filho */
       var id = $event.idDoCliente;
       /* armazena elementos que não passaram na condição inicial em um novo array  */
-      var novoArray = this.clientes.filter(cliente => cliente.id != id);
+      var novoArray = this.clientes.filter((cliente) => cliente.id != id);
       /* substitui o array antigo pelo novo */
       this.clientes = novoArray;
-    }
+    },
   },
 };
 </script>
