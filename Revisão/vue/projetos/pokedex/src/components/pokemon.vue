@@ -3,7 +3,7 @@
     <div class="card has-text-centered">
       <div class="card-image">
         <figure>
-          <img :src="pokemon.front" />
+          <img :src="currentImg" />
         </figure>
       </div>
 
@@ -74,6 +74,18 @@ export default {
 
 <style scoped>
 #pokemon {
-  margin-top: 2%;
+  margin-top: 3%;
+}
+
+.card {
+  margin-top: 5%;
+}
+
+.card-content {
+  padding-top: 0.1rem !important;
+}
+
+.button {
+  background-color: #ef5350;
 }
 </style>

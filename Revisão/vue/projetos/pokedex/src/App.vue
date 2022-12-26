@@ -1,6 +1,23 @@
 <template>
   <div id="app">
+    <div class="logo has-text-centered">
+      <img src="./assets/img/Pokédex_logo.png" alt="" />
+    </div>
+
     <div class="column is-half is-offset-one-quarter">
+      <div class="pesquisa columns">
+        <input
+          class="input"
+          type="text"
+          placeholder="Buscar pokemon..."
+          v-model="busca"
+        />
+
+        <button class="button is-success">
+          <strong>Buscar</strong>
+        </button>
+      </div>
+
       <div class="poke" v-for="(poke, index) in pokemons" :key="index">
         <Pokemon :name="poke.name" :url="poke.url" :num="index + 1" />
       </div>
@@ -16,6 +33,7 @@ export default {
   data() {
     return {
       pokemons: [],
+      busca: '',
     };
   },
 
@@ -36,13 +54,20 @@ export default {
 </script>
 
 <style scoped>
-/* #app {
-  margin-top: 3rem;
-  padding: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
+#app {
+  background-color: #263238;
+  padding-top: 2%;
+}
+
+.logo img {
+  width: 30vw;
+}
+
+.pesquisa {
+  margin-top: 2rem;
+}
+
+.pesquisa input {
+  margin-right: 1rem;
+}
 </style>
