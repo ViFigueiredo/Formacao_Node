@@ -47,9 +47,9 @@ export default {
           email: this.emailField,
           idade: this.idadeField,
         });
+        (this.nomeField = ''), (this.emailField = ''), (this.idadeField = '');
+        this.deuErro = true;
       }
-      (this.nomeField = ''), (this.emailField = ''), (this.idadeField = '');
-      this.deuErro = true;
     },
   },
 };
