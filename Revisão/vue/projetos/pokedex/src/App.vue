@@ -13,12 +13,19 @@
           v-model="busca"
         />
 
-        <button class="button is-success">
+        <button class="button is-success" id="buscaBtn" @click="buscar">
           <strong>Buscar</strong>
         </button>
       </div>
 
-      <div class="poke" v-for="(poke, index) in pokemons" :key="index">
+      <!-- alteramos o array[pokemons] para a computed{resultadoBusca} para uma busca dinamica -->
+      <!-- alteramos o array[pokemons] para a method{filteredPokemons} para uma busca por botão -->
+      <!-- BUG: index não atualiza o componente -> trocado por  -->
+      <div
+        class="poke"
+        v-for="(poke, index) in filteredPokemons"
+        :key="poke.name"
+      >
         <Pokemon :name="poke.name" :url="poke.url" :num="index + 1" />
       </div>
     </div>
@@ -34,6 +41,7 @@ export default {
     return {
       pokemons: [],
       busca: '',
+      filteredPokemons: [],
     };
   },
 
@@ -45,10 +53,32 @@ export default {
         // console.log('Pegando a lista de pokemons...');
         this.pokemons = response.data.results;
         // console.log(this.pokemons);
+        this.filteredPokemons = response.data.results;
       });
   },
   components: {
     Pokemon,
+  },
+  methods: {
+    buscar: function () {
+      this.filteredPokemons = this.pokemons;
+      if (this.busca == undefined || this.busca == '' || this.busca == ' ') {
+        this.filteredPokemons = this.pokemons;
+      } else {
+        this.filteredPokemons = this.pokemons.filter(
+          (pokemon) => pokemon.name == this.busca,
+        );
+      }
+    },
+  },
+  computed: {
+    // resultadoBusca: function () {
+    //   if (this.busca == undefined || this.busca == '' || this.busca == ' ') {
+    //     return this.pokemons;
+    //   } else {
+    //     return this.pokemons.filter((pokemon) => pokemon.name == this.busca);
+    //   }
+    // },
   },
 };
 </script>
