@@ -19,6 +19,19 @@ import HelloWorld from './components/HelloWorld.vue';
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+
+        <!-- trabalhando com rotas dinamicas -->
+        <RouterLink
+          :to="{
+            name: 'cadastro-form-param',
+            params: { dado: '1010' },
+          }"
+          >Cadastro</RouterLink
+        >
+
+        <!-- trabalhando com rotas aninhadas -->
+        <RouterLink to="/nested">Aninhadas(Pai)</RouterLink>
+        <RouterLink to="/nested/nested2">Aninhadas(Filha)</RouterLink>
       </nav>
     </div>
   </header>
